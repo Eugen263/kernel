@@ -1,7 +1,3 @@
-if (window.location.href !== 'http://kernel.loc/') {
-    window.location.href = 'http://kernel.loc/';
-}
-
 console.log('Controller.js: Start working');
 console.log('Controller.js: Importing scripts');
 
@@ -25,7 +21,7 @@ openRequest.onupgradeneeded = function() {
 
 console.log('Kernel.js: Start to loading page');
 Kernel.pageGenerator('leftBox');
-PageController.messageGenerator('2');
+//PageController.messageGenerator('2');
 
 class Controller_class {
     click(type, elem, event) {
@@ -43,3 +39,10 @@ export var Controller = new Controller_class();
 
 
 Router.checkPopState();
+if (window.location.pathname !== '/') {
+    let path = window.location.pathname;
+    if (path.split('/').indexOf('messages')){
+        let pageId = path.split('/')[2];
+        Router.to({id: pageId});
+    }
+}

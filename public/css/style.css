@@ -34,7 +34,7 @@ body {
 }
 
 .root {
-    width: 1680px;
+    /*width: 1680px;*/
     margin: 0 auto;
     height: 100%;
     border-left: 1px solid #292929;

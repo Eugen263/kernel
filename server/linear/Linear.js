@@ -3,10 +3,8 @@ class LinearDOM_class {
     domStructure;
 
     render() {
-        //document.addEventListener('DOMContentLoaded', () => {
         this.domStructure = document.querySelector('.page');
-        console.log(this.domStructure);
-        //})
+        //console.log(this.domStructure);
     }
 }
 
