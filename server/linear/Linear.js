@@ -4,16 +4,14 @@ class LinearDOM_class {
 
     render() {
         //document.addEventListener('DOMContentLoaded', () => {
-        this.domStructure = document.querySelector('.root');
+        this.domStructure = document.querySelector('.page');
+        console.log(this.domStructure);
         //})
-    }
-
-    DOM() {
-        return this.domStructure;
     }
 }
 
-export var LinearDOM = new Linear_class();
+export var LinearDOM = new LinearDOM_class();
+LinearDOM.render();
 
 class Linear_class extends LinearDOM_class {
     paste(place, data) {
@@ -28,7 +26,7 @@ class Linear_class extends LinearDOM_class {
     click(element, eventType, event) {
         //console.log('Linear.js: Click event');
         if ('class' in element) {
-            document.getElementsByClassName(element.class)[element.order].addEventListener(eventType, function (){
+            LinearDOM.domStructure.querySelectorAll('.'+element.class)[element.order].addEventListener(eventType, function (){
                 if (Array.isArray(event.event)) {
                     let e = event.event[0];
                     e({event: event.event[1], id: event.id});
@@ -44,7 +42,7 @@ class Linear_class extends LinearDOM_class {
         }
         if ('class' in element) {
             if ('order' in element) {
-                return document.getElementsByClassName(element.class)[element.order];
+                return LinearDOM.domStructure.querySelectorAll('.'+element.class)[element.order];
             } else {
                 return document.getElementsByClassName(element['class'])[0];
             }
@@ -76,18 +74,19 @@ class Linear_class extends LinearDOM_class {
             }
             if ('paste' in place) {
                 if ('class' in place) {
-                    //let block = document.getElementsByClassName(place['class'])[order];
-                    let block = LinearDOM.domStructure.querySelector('.'+place.class)[order];
+                    let block = LinearDOM.domStructure.querySelectorAll('.'+place['class'])[order];
                     block.insertBefore(div, block.lastChild);
                 } else if ('id' in place) {
-                    let block = document.getElementById(place['id']).appendChild(div);
+                    let block = LinearDOM.domStructure.querySelector('#'+place.id).appendChild(div);
                     block.insertBefore(div, block.lastChild);
                 }
             } else {
                 if ('class' in place) {
-                    document.getElementsByClassName(place['class'])[order].appendChild(div);
+                    //document.getElementsByClassName(place['class'])[order].appendChild(div);
+                    LinearDOM.domStructure.querySelectorAll('.'+place.class)[order].appendChild(div);
                 } else if ('id' in place) {
-                    document.getElementById(place['id']).appendChild(div);
+                    LinearDOM.domStructure.querySelector('#'+place.id).appendChild(div);
+                    //document.getElementById(place['id']).appendChild(div);
                 }
             }
         }
@@ -108,7 +107,7 @@ class Linear_class extends LinearDOM_class {
                 if ('order' in place) {
                     order = place['order'];
                 }
-                document.getElementsByClassName(place['class'])[order].appendChild(i_elem);
+                LinearDOM.domStructure.querySelectorAll('.'+place.class)[order].appendChild(i_elem);
             } else if ('id' in place) {
                 document.getElementById(place['id']).appendChild(i_elem);
             }
@@ -136,7 +135,7 @@ class Linear_class extends LinearDOM_class {
                 if ('order' in place) {
                     order = place['order'];
                 }
-                document.getElementsByClassName(place['class'])[order].appendChild(input);
+                LinearDOM.domStructure.querySelectorAll('.'+place.class)[order].appendChild(input);
             } else if ('id' in place) {
                 document.getElementById(place['id']).appendChild(input);
             }
@@ -161,7 +160,7 @@ class Linear_class extends LinearDOM_class {
                 if ('order' in place) {
                     order = place['order'];
                 }
-                document.getElementsByClassName(place['class'])[order].appendChild(h);
+                LinearDOM.domStructure.querySelectorAll('.'+place.class)[order].appendChild(h);
             } else if ('id' in place) {
                 document.getElementById(place['id']).appendChild(h);
             }
@@ -175,7 +174,7 @@ class Linear_class extends LinearDOM_class {
             box.id = 'overflow_cont_box';
             box.innerHTML = '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>';
             if ('class' in place) {
-                document.getElementsByClassName(place['class'])[0].appendChild(box);
+                LinearDOM.domStructure.querySelectorAll('.'+place.class)[0].appendChild(box);
             }
 
             if ('id' in place) {

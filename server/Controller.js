@@ -25,7 +25,7 @@ openRequest.onupgradeneeded = function() {
 
 console.log('Kernel.js: Start to loading page');
 Kernel.pageGenerator('leftBox');
-//PageController.messageGenerator('2');
+PageController.messageGenerator('2');
 
 class Controller_class {
     click(type, elem, event) {

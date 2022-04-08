@@ -8,8 +8,10 @@
         <!--<div id="overflow_box">
             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>-->
-        <div class="root">
+        <div class="page">
+            <div class="root">
 
+            </div>
         </div>
     </body>
     <script type="module" src="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/server/Controller.js'?>"></script>
