@@ -23,11 +23,19 @@ class Linear_class extends LinearDOM_class {
 
     click(element, eventType, event) {
         //console.log('Linear.js: Click event');
-        if ('class' in element) {
-            LinearDOM.domStructure.querySelectorAll('.'+element.class)[element.order].addEventListener(eventType, function (){
+        let order = 0;
+        if ('order' in element) {
+            order = element.order;
+        }
+        if ('place' in element) {
+            LinearDOM.domStructure.querySelectorAll(element.place)[order].addEventListener(eventType, function (){
                 if (Array.isArray(event.event)) {
                     let e = event.event[0];
-                    e({event: event.event[1], id: event.id});
+                    if (event.id === undefined) {
+                        e({event: event.event[1]});
+                    } else {
+                        e({event: event.event[1], id: event.id});
+                    }
                 }
             })
         }
@@ -35,15 +43,12 @@ class Linear_class extends LinearDOM_class {
 
     get(element) {
         //console.log('Linear.js: Getting element');
-        if ('id' in element) {
-            return document.getElementById(element['id']);
-        }
         if ('class' in element) {
+            let order = 0;
             if ('order' in element) {
-                return LinearDOM.domStructure.querySelectorAll('.'+element.class)[element.order];
-            } else {
-                return document.getElementsByClassName(element['class'])[0];
+                order = element.order;
             }
+            return 'text';//LinearDOM.domStructure.querySelectorAll(element.place)[order];
         }
     }
 
@@ -162,6 +167,27 @@ class Linear_class extends LinearDOM_class {
             } else if ('id' in place) {
                 document.getElementById(place['id']).appendChild(h);
             }
+        }
+    }
+
+    button(create, place) {
+        let order = 0;
+        if ('order' in place) {
+            order = place.order;
+        }
+        let button = document.createElement('button');
+        if ('id' in  create) {
+            button.id = create.id;
+        }
+        if ('class' in create) {
+            button.className = create.class;
+        }
+
+        if ('class' in place) {
+            LinearDOM.domStructure.querySelectorAll('.'+place.class)[order].appendChild(button);
+        }
+        if ('id' in place) {
+            LinearDOM.domStructure.querySelectorAll('#'+place.id).appendChild(button);
         }
     }
 

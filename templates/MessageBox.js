@@ -1,7 +1,9 @@
 import { IndexedDB } from "../server/database/indexedDB.js";
 import { Linear } from "../server/linear/Linear.js";
 import { ChatBox } from "./ChatBox.js";
+import { Router } from "../server/router/Router.js";
 
+//render all message page
 class MessageBox_class {
     render(props) {
         let db = IndexedDB.get({id: props.id});
@@ -26,6 +28,22 @@ class MessageBox_class {
 
         //Main chat Container
         ChatBox.render({id: props.id});
+
+        //input box
+        Linear.div({class: 'chat_input_box'}, {class: 'chat_box'});
+        Linear.div({class: 'chat_input'}, {class: 'chat_input_box'});
+        Linear.input({type: 'text', class: 'chat_input_but', placeholder: 'Type'}, {class: 'chat_input'});
+
+        //input box icons
+        Linear.div({class: 'inp_but_box'}, {class: 'chat_input'});
+        Linear.div({class: 'input_smile_ico'}, {class: 'inp_but_box'});
+        Linear.i({class: 'far fa-smile'}, {class: 'input_smile_ico'});
+        Linear.div({class: 'input_pin'}, {class: 'inp_but_box'});
+        Linear.i({class: 'fas fa-paperclip'}, {class: 'input_pin'});
+        Linear.button({class: 'send'}, {class: 'inp_but_box'});
+        Linear.i({class: 'far fa-paper-plane'}, {class: 'send'});
+
+        Linear.click({place: '.chat_elem_box'}, 'click', {event: [Router.to, '?info']});
     }
 }
 

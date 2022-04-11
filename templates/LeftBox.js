@@ -33,7 +33,7 @@ class LeftBox_class {
         Linear.div({class: 'conts_scrolled'}, {class: 'conts_top'});
         for (const props of this.db) {
             ContButton.render(props);
-            Linear.click({class: 'contact_box', order: props.id}, 'click', {event: [Router.to, '../messages/'+props.id], id: props.id});
+            Linear.click({place: '.contact_box', order: props.id}, 'click', {event: [Router.to, '../messages/'+props.id], id: props.id});
         }
         //Linear.get({'class': 'contact_box', 'order': 0}).addEventListener('click', Router.to('/message/1'));
     }

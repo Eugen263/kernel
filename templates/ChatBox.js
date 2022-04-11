@@ -10,8 +10,6 @@ class ChatBox_class {
         Linear.div({class: 'chat_scroll'}, {class: 'chat_box'});
         ChatBox.messageIn({chatId: props.id, messageId: 0});
         ChatBox.messageOut({chatId: props.id, messageId: 1});
-        //input box
-        Linear.div({class: 'chat_input_box'}, {class: 'chat_box'});
     }
 
     messageIn(props) {

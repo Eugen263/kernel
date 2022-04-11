@@ -4,7 +4,7 @@ console.log('Controller.js: Importing scripts');
 import { linker } from './linker/Linker.js';
 import { Kernel } from './Kernel.js';
 import { Router } from './router/Router.js';
-import { PageController } from "./PageController.js";
+//import { PageController } from "./PageController.js";
 
 console.log('Linker.js: Importing CSS and JS');
 linker.linkAll();
