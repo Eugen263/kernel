@@ -1,36 +1,45 @@
 import { Linear } from "./linear/Linear.js";
 import { MessageBox } from "../templates/MessageBox.js";
+import { RightBox } from "../templates/RightBox.js";
 
 class PageController_class {
     urlChange(props) {
         let url = window.location.pathname.split('/');
         if (url[1] === 'messages') {
-            if (url[2].split('?')[0] === 'info') {
-                console.log('info');
+            let chat_id = url[2];
+            PageController.messageGenerator(chat_id, 'message');
+            if (window.location.search.substring(1).split('&')[0] === 'info') {
+                PageController.messageGenerator(chat_id, 'info');
             }
-            PageController.messageGenerator(props.id);
         }
     }
 
-    messageGenerator(messageId) {
-        PageController.changeState({order: messageId, place: '.contact_box'});
+    messageGenerator(messageId, page) {
+        if (page === 'message') {
+            PageController.changeState({order: messageId, place: '.contact_box'});
+        }
+        if (page === 'info') {
+            PageController.rightBox({profileId: messageId});
+        }
     }
 
     changeState(element) {
-        //if (Linear.get({place: '.contact_active'})) {
-            /*let contact = Linear.get({place: element.place, order: element.order});
-            let contact_active = Linear.get({place: '.contact_active'});
-            contact_active.className = element.class;
-            contact.className = contact.className + ' contact_active';*/
-        //} else {
-            //let contact = Linear.get({place: '.'+element.class, order: element.order});
-            //console.log(contact);
-            //let class_name = contact.className;
-            //class_name = class_name + ' contact_active';
-            //contact.className = class_name;
-        //}
-        Linear.get({place: '#chat_box'});//.innerHTML = '';
-        //MessageBox.render({id: element.order});
+        if (Linear.get({place: '.contact_active'})) {
+            let contact = Linear.get({place: element.place, order: element.order});
+            let contact_act = Linear.get({place: '.contact_active'});
+            contact_act.className = 'contact_box';
+            contact.className = contact.className + ' contact_active';
+
+        } else {
+            let contact = Linear.get({place: element.place, order: element.order});
+            contact.className = contact.className + ' contact_active';
+        }
+        Linear.get({place: '#chat_box'}).innerHTML = '';
+        MessageBox.render({id: element.order});
+    }
+
+    rightBox(element) {
+        RightBox.render();
     }
 }
 
