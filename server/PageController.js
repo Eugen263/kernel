@@ -17,14 +17,13 @@ class PageController_class {
     messageGenerator(messageId, page) {
         if (page === 'message') {
             PageController.changeState({order: messageId, place: '.contact_box'});
-        }
-        if (page === 'info') {
+        } else if (page === 'info') {
             PageController.rightBox({profileId: messageId});
         }
     }
 
     changeState(element) {
-        if (Linear.get({place: '.contact_active'})) {
+        if (Linear.get({place: '.contact_active'}) !== undefined) {
             let contact = Linear.get({place: element.place, order: element.order});
             let contact_act = Linear.get({place: '.contact_active'});
             contact_act.className = 'contact_box';
@@ -39,7 +38,7 @@ class PageController_class {
     }
 
     rightBox(element) {
-        RightBox.render();
+        RightBox.render({id: element.profileId});
     }
 }
 

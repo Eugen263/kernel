@@ -120,6 +120,9 @@ class Linear_class extends LinearDOM_class {
         if ('placeholder' in create) {
             input.placeholder = create.placeholder;
         }
+        if ('checked' in create) {
+            input.defaultChecked = true;
+        }
         if (place !== '') {
             if ('place' in place) {
                 let order = 0;
@@ -169,6 +172,42 @@ class Linear_class extends LinearDOM_class {
 
         if ('place' in place) {
             LinearDOM.domStructure.querySelectorAll(place.place)[order].appendChild(button);
+        }
+    }
+
+    label(create, place) {
+        let order = 0;
+        if ('order' in place) {
+            order = place.order;
+        }
+        let label = document.createElement('label');
+        if ('id' in  create) {
+            label.id = create.id;
+        }
+        if ('class' in create) {
+            label.className = create.class;
+        }
+
+        if ('place' in place) {
+            LinearDOM.domStructure.querySelectorAll(place.place)[order].appendChild(label);
+        }
+    }
+
+    span(create, place) {
+        let order = 0;
+        if ('order' in place) {
+            order = place.order;
+        }
+        let span = document.createElement('span');
+        if ('id' in  create) {
+            span.id = create.id;
+        }
+        if ('class' in create) {
+            span.className = create.class;
+        }
+
+        if ('place' in place) {
+            LinearDOM.domStructure.querySelectorAll(place.place)[order].appendChild(span);
         }
     }
 
